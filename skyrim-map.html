@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карта Скайрима — A4 для пирографии</title>
+<style>
+  :root{
+    --bg:#111318; --panel:#1a1d24; --panel2:#202430; --line:#2c3140;
+    --txt:#e8e6e3; --dim:#9aa3b2; --accent:#d9a441;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 system-ui,'Segoe UI',Roboto,sans-serif}
+  header{padding:22px 18px 10px;text-align:center}
+  h1{font-size:22px;margin:0 0 6px;font-weight:600;letter-spacing:.5px}
+  .sub{color:var(--dim);font-size:13.5px;max-width:760px;margin:0 auto}
+  .sub b{color:var(--accent)}
+  .wrap{max-width:1150px;margin:0 auto;padding:16px 14px 60px}
+  .legend{display:flex;gap:18px;justify-content:center;color:var(--dim);font-size:13px;margin:12px 0 8px;flex-wrap:wrap}
+  .legend b{color:var(--txt)}
+  .grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;
+  }
+  .tile{
+    position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;
+    transition:border-color .15s,transform .12s;background:#000;
+  }
+  .tile:hover{border-color:var(--accent);transform:scale(1.02);z-index:2}
+  .tile img{display:block;width:100%;height:auto}
+  .tile .tag{
+    position:absolute;right:5px;top:5px;background:rgba(15,17,22,.82);color:var(--accent);
+    font-size:11.5px;font-weight:600;padding:2px 7px;border-radius:20px;letter-spacing:.4px;
+  }
+  #ov{position:fixed;inset:0;background:rgba(5,7,10,.94);display:none;flex-direction:column;z-index:50}
+  #ov.open{display:flex}
+  .ovbar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#12151c;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .ovbar .title{font-weight:600;font-size:15px;flex:1;min-width:120px}
+  button{
+    background:var(--accent);color:#151210;border:none;border-radius:9px;padding:10px 16px;
+    font-size:14px;font-weight:650;cursor:pointer;transition:filter .15s;font-family:inherit;
+  }
+  button:hover{filter:brightness(1.1)}
+  button.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+  #imgbox{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:14px}
+  #imgbox img{max-width:96%;height:auto}
+  .hint{color:var(--dim);font-size:12.5px;text-align:center;padding:0 14px 12px}
+  #printArea{display:none}
+  @media print{
+    body>*{display:none !important}
+    #printArea{display:block !important;position:static;width:28.7cm;height:20cm;overflow:hidden}
+    #printArea img{width:28.7cm;height:20cm}
+    @page{size:A4 landscape;margin:0}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🐉 Карта Скайрима — разбивка на A4</h1>
+  <div class="sub">
+    Столешница <b>130 × 60 см</b> · лист <b>28.7 × 20 см</b> (альбомный A4) · нахлёст <b>1 см</b> между листами<br>
+    Клик по тайлу → откроется крупно → кнопка <b>«🖨 Печать»</b> печатает только этот лист.<br>
+    В диалоге принтера выбирай <b>«Фактический размер / 100%»</b> — НЕ «вписать в страницу».
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="legend">
+    <span>Листов: <b>20</b> (5 колонок × 4 ряда)</span>
+    <span>Карта: <b>129.7 × 60 см</b></span>
+    <span>Ряды: <b>r1–r4</b> сверху вниз, колонки: <b>c1–c5</b> слева направо</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div id="ov">
+  <div class="ovbar">
+    <div class="title" id="ovTitle">—</div>
+    <button id="btnPrint">🖨 Печать</button>
+    <button class="ghost" id="btnClose">✕ Закрыть</button>
+  </div>
+  <div id="imgbox"><img id="ovImg" alt=""></div>
+  <div class="hint">Масштаб печати <b>100%</b>, поля «нет»/0. Метку row/col в углу листа не переносить на столешницу.</div>
+</div>
+
+<div id="printArea"><img id="printImg" alt=""></div>
+
+<script id="grid-data" type="application/json">[{"r": 1, "c": 1, "file": "skyrim_r1c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 2, "file": "skyrim_r1c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 3, "file": "skyrim_r1c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 4, "file": "skyrim_r1c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 5, "file": "skyrim_r1c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 1, "file": "skyrim_r2c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 2, "file": "skyrim_r2c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 3, "file": "skyrim_r2c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 4, "file": "skyrim_r2c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 5, "file": "skyrim_r2c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 1, "file": "skyrim_r3c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 2, "file": "skyrim_r3c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 3, "file": "skyrim_r3c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 4, "file": "skyrim_r3c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 5, "file": "skyrim_r3c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 1, "file": "skyrim_r4c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 2, "file": "skyrim_r4c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 3, "file": "skyrim_r4c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 4, "file": "skyrim_r4c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 5, "file": "skyrim_r4c5.jpg", "wcm": 28.7, "hcm": 20.0}]</script>
+<script>
+const TILES = JSON.parse(document.getElementById('grid-data').textContent);
+const grid = document.getElementById('grid');
+let current = null;
+
+TILES.forEach(t=>{
+  const d = document.createElement('div');
+  d.className = 'tile';
+  d.innerHTML = `<img src="maps/${t.file}" alt="ряд ${t.r} колонка ${t.c}" loading="lazy">
+                 <span class="tag">r${t.r}·c${t.c}</span>`;
+  d.onclick = ()=>openTile(t);
+  grid.appendChild(d);
+});
+
+const ov=document.getElementById('ov'), ovImg=document.getElementById('ovImg'),
+      ovTitle=document.getElementById('ovTitle');
+
+function openTile(t){
+  current = t;
+  ovImg.src = `maps/${t.file}`;
+  ovTitle.textContent = `Лист r${t.r}·c${t.c} — ряд ${t.r}/4, колонка ${t.c}/5`;
+  ov.classList.add('open');
+}
+document.getElementById('btnClose').onclick = ()=>ov.classList.remove('open');
+ov.addEventListener('click', e=>{ if(e.target===document.getElementById('imgbox')) ov.classList.remove('open'); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') ov.classList.remove('open'); });
+
+document.getElementById('btnPrint').onclick = ()=>{
+  if(!current) return;
+  document.getElementById('printImg').src = `maps/${current.file}`;
+  // wait for image to be ready before printing
+  const img = document.getElementById('printImg');
+  const go = ()=>{ setTimeout(()=>window.print(), 150); };
+  if (img.complete) go(); else img.onload = go;
+};
+</script>
+</body>
+</html>
