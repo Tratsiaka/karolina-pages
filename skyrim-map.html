@@ -48,8 +48,8 @@
   #printArea{display:none}
   @media print{
     body>*{display:none !important}
-    #printArea{display:block !important;position:static;width:28.7cm;height:20cm;overflow:hidden}
-    #printArea img{width:28.7cm;height:20cm}
+    #printArea{display:block !important;position:static;overflow:hidden}
+    #printArea img{object-fit:fill}
     @page{size:A4 landscape;margin:0}
   }
 </style>
@@ -58,7 +58,7 @@
 <header>
   <h1>🐉 Карта Скайрима — разбивка на A4</h1>
   <div class="sub">
-    Столешница <b>130 × 60 см</b> · лист <b>28.7 × 20 см</b> (альбомный A4) · нахлёст <b>1 см</b> между листами<br>
+    Столешница <b>130 × 60 см</b> · лист <b>25.94 × 15 см</b> (A4 альбомная) · рез <b>стык в стык, без нахлёста</b><br>
     Клик по тайлу → откроется крупно → кнопка <b>«🖨 Печать»</b> печатает только этот лист.<br>
     В диалоге принтера выбирай <b>«Фактический размер / 100%»</b> — НЕ «вписать в страницу».
   </div>
@@ -68,7 +68,7 @@
   <div class="legend">
     <span>Листов: <b>20</b> (5 колонок × 4 ряда)</span>
     <span>Карта: <b>129.7 × 60 см</b></span>
-    <span>Ряды: <b>r1–r4</b> сверху вниз, колонки: <b>c1–c5</b> слева направо</span>
+    <span>Лист: <b>25.94 × 15 см</b> — склейка стык в стык, дублирования нет</span>
   </div>
   <div class="grid" id="grid"></div>
 </div>
@@ -80,12 +80,12 @@
     <button class="ghost" id="btnClose">✕ Закрыть</button>
   </div>
   <div id="imgbox"><img id="ovImg" alt=""></div>
-  <div class="hint">Масштаб печати <b>100%</b>, поля «нет»/0. Метку row/col в углу листа не переносить на столешницу.</div>
+  <div class="hint">Масштаб печати <b>100%</b>, поля «нет»/0. Лист <b>25.94 × 15 см</b> — прикладывается к соседнему встык, линии должны сходиться точно.</div>
 </div>
 
 <div id="printArea"><img id="printImg" alt=""></div>
 
-<script id="grid-data" type="application/json">[{"r": 1, "c": 1, "file": "skyrim_r1c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 2, "file": "skyrim_r1c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 3, "file": "skyrim_r1c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 4, "file": "skyrim_r1c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 1, "c": 5, "file": "skyrim_r1c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 1, "file": "skyrim_r2c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 2, "file": "skyrim_r2c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 3, "file": "skyrim_r2c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 4, "file": "skyrim_r2c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 2, "c": 5, "file": "skyrim_r2c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 1, "file": "skyrim_r3c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 2, "file": "skyrim_r3c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 3, "file": "skyrim_r3c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 4, "file": "skyrim_r3c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 3, "c": 5, "file": "skyrim_r3c5.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 1, "file": "skyrim_r4c1.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 2, "file": "skyrim_r4c2.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 3, "file": "skyrim_r4c3.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 4, "file": "skyrim_r4c4.jpg", "wcm": 28.7, "hcm": 20.0}, {"r": 4, "c": 5, "file": "skyrim_r4c5.jpg", "wcm": 28.7, "hcm": 20.0}]</script>
+<script id="grid-data" type="application/json">[{"r": 1, "c": 1, "file": "skyrim_r1c1.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 1, "c": 2, "file": "skyrim_r1c2.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 1, "c": 3, "file": "skyrim_r1c3.jpg", "wcm": 25.96, "hcm": 15.0}, {"r": 1, "c": 4, "file": "skyrim_r1c4.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 1, "c": 5, "file": "skyrim_r1c5.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 2, "c": 1, "file": "skyrim_r2c1.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 2, "c": 2, "file": "skyrim_r2c2.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 2, "c": 3, "file": "skyrim_r2c3.jpg", "wcm": 25.96, "hcm": 15.0}, {"r": 2, "c": 4, "file": "skyrim_r2c4.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 2, "c": 5, "file": "skyrim_r2c5.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 3, "c": 1, "file": "skyrim_r3c1.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 3, "c": 2, "file": "skyrim_r3c2.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 3, "c": 3, "file": "skyrim_r3c3.jpg", "wcm": 25.96, "hcm": 15.0}, {"r": 3, "c": 4, "file": "skyrim_r3c4.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 3, "c": 5, "file": "skyrim_r3c5.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 4, "c": 1, "file": "skyrim_r4c1.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 4, "c": 2, "file": "skyrim_r4c2.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 4, "c": 3, "file": "skyrim_r4c3.jpg", "wcm": 25.96, "hcm": 15.0}, {"r": 4, "c": 4, "file": "skyrim_r4c4.jpg", "wcm": 25.94, "hcm": 15.0}, {"r": 4, "c": 5, "file": "skyrim_r4c5.jpg", "wcm": 25.94, "hcm": 15.0}]</script>
 <script>
 const TILES = JSON.parse(document.getElementById('grid-data').textContent);
 const grid = document.getElementById('grid');
@@ -115,10 +115,11 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') ov.classList.remo
 
 document.getElementById('btnPrint').onclick = ()=>{
   if(!current) return;
-  document.getElementById('printImg').src = `maps/${current.file}`;
-  // wait for image to be ready before printing
   const img = document.getElementById('printImg');
-  const go = ()=>{ setTimeout(()=>window.print(), 150); };
+  img.style.width = current.wcm + 'cm';
+  img.style.height = current.hcm + 'cm';
+  img.src = `maps/${current.file}?v=2`;
+  const go = ()=>{ setTimeout(()=>window.print(), 200); };
   if (img.complete) go(); else img.onload = go;
 };
 </script>
